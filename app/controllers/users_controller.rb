@@ -17,6 +17,35 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+  
+  def edit
+    @user = User.edit(user_params)
+    if @user.save
+      flash[:success] = "#"
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
+  
+  # def update
+    # @user = User.update(user_params)
+    # if @user.save
+      # flash[:success] = "#"
+     # redirect_to @user
+    # else
+    #  render 'new'
+   # end
+  # end
+
+  def update
+    @user = User.update(user_params)
+    if @User.update(message_params)
+      redirect_to root_path , notice: 'プロフィールを編集しました'
+    else
+      render 'edit'
+    end
+  end
 
   private
 
