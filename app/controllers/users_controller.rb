@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def show # 追加
     @user = User.find(params[:id])
+    flash[:success] = "This page is your own page/"
   end
   
   def new
@@ -18,14 +19,24 @@ class UsersController < ApplicationController
     end
   end
   
-  def edit
+  #def edit
+  #  @user = User.edit(user_params)
+  #  if @user.save
+  #    flash[:success] = "#"
+  #    redirect_to @user
+  #  else
+  #    render 'new'
+  #  end
+  #end
+  
+  def edit 
     @user = User.edit(user_params)
-    if @user.save
-      flash[:success] = "#"
-      redirect_to @user
-    else
+     if @user.save
+      flash[:success] = "Please fill in Profiles"
+      redirect_to edit_user_path #edit.html.erbに飛ばしたい
+     else
       render 'new'
-    end
+     end
   end
   
   # def update
