@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc)
+    # "一覧リンクをユーザープロフィールページに設置したい"
   end
   
   def new
@@ -18,30 +19,10 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
-  #def edit
-  #  @user = User.edit(user_params)
-  #  if @user.save
-  #    flash[:success] = "#"
-  #    redirect_to @user
-  #  else
-  #    render 'new'
-  #  end
-  #end
-  
+
   def edit 
     @user = User.find(params[:id])
   end
-  
-  # def update
-    # @user = User.update(user_params)
-    # if @user.save
-      # flash[:success] = "#"
-     # redirect_to @user
-    # else
-    #  render 'new'
-   # end
-  # end
 
   def update
     @user = User.find(params[:id])
@@ -51,6 +32,20 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  #追加↓
+  def followings
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following_users
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.follower_users
+  end
+  #追加↑
 
   private
 
