@@ -30,13 +30,7 @@ class UsersController < ApplicationController
   #end
   
   def edit 
-    @user = User.edit(user_params)
-     if @user.save
-      flash[:success] = "Please fill in Profiles"
-      redirect_to edit_user_path #edit.html.erbに飛ばしたい
-     else
-      render 'new'
-     end
+    @user = User.find(params[:id])
   end
   
   # def update
@@ -50,9 +44,9 @@ class UsersController < ApplicationController
   # end
 
   def update
-    @user = User.update(user_params)
-    if @User.update(message_params)
-      redirect_to root_path , notice: 'プロフィールを編集しました'
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to @user , notice: 'プロフィールを編集しました'
     else
       render 'edit'
     end
@@ -61,7 +55,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :password, :prefecture,
                                  :password_confirmation)
   end
 end
