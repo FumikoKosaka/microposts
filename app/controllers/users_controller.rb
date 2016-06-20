@@ -2,11 +2,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-<<<<<<< HEAD
     @microposts = @user.microposts.order(created_at: :desc)
-=======
-    flash[:success] = "This page is your own page/"
->>>>>>> user-profile
   end
   
   def new
