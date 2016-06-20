@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
-    # "一覧リンクをユーザープロフィールページに設置したい"
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:pages]).per(3)
   end
   
   def new
